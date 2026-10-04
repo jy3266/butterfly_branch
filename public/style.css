@@ -1,0 +1,169 @@
+:root {
+  --fg: #f2f2f2;
+  --dim: rgba(255, 255, 255, 0.5);
+  --line: rgba(255, 255, 255, 0.22);
+  --glow: 0 0 6px rgba(255, 255, 255, 0.9), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 44px rgba(255, 255, 255, 0.35);
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #000;
+  color: var(--fg);
+  overflow: hidden;
+  font-family: 'Gowun Batang', serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#stage canvas { display: block; touch-action: none; }
+
+#top-left, #hint {
+  position: fixed;
+  top: calc(18px + env(safe-area-inset-top));
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--dim);
+  pointer-events: none;
+}
+#top-left { left: 20px; display: flex; flex-direction: column; gap: 6px; }
+#live { font-size: 10px; letter-spacing: 0.16em; color: rgba(255, 255, 255, 0.3); }
+#live::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 7px;
+  border-radius: 50%;
+  vertical-align: 1px;
+  background: rgba(255, 255, 255, 0.25);
+}
+#live.on { color: var(--dim); }
+#live.on::before { background: #fff; box-shadow: 0 0 6px #fff; }
+#sound {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  pointer-events: auto;
+}
+#sound.on { color: rgba(255, 255, 255, 0.3); cursor: default; }
+#hint { left: 20px; top: calc(98px + env(safe-area-inset-top)); transition: opacity 1.2s; }
+#hint.gone { opacity: 0; }
+
+/* 나비를 눌렀을 때 뜨는 글 */
+#card {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: max-content;
+  max-width: min(320px, calc(100vw - 32px));
+  padding: 14px 22px 12px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s;
+}
+#card.show { opacity: 1; pointer-events: auto; }
+#card .text {
+  font-size: 20px;
+  line-height: 1.65;
+  color: #fff;
+  text-shadow: var(--glow);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+#card .meta {
+  margin-top: 10px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--dim);
+}
+#close {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: none;
+  color: var(--dim);
+  font-size: 20px;
+  cursor: pointer;
+}
+#close:hover { color: #fff; }
+
+/* 새로 태어난 나비가 잠깐 속삭이는 글 */
+.whisper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  max-width: 260px;
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: center;
+  color: #fff;
+  text-shadow: var(--glow);
+  pointer-events: none;
+  word-break: keep-all;
+  animation: whisper 7s forwards;
+}
+@keyframes whisper {
+  0% { opacity: 0; }
+  12% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* 참여 QR: 검은 바탕에 흰 점으로 뒤집어 화면에 녹아들게 */
+#join {
+  position: fixed;
+  right: calc(20px + env(safe-area-inset-right));
+  top: calc(18px + env(safe-area-inset-top));
+  padding: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 4px;
+  background: #000;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.06);
+}
+#join img {
+  display: block;
+  width: 112px;
+  height: 112px;
+  filter: invert(1);
+  image-rendering: pixelated;
+  opacity: 0.92;
+}
+
+#invite {
+  position: fixed;
+  left: 50%;
+  bottom: calc(30px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  margin: 0;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  animation: breathe 6s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  #join { right: 14px; padding: 6px; }
+  #join img { width: 76px; height: 76px; }
+  #invite { font-size: 14px; }
+  #hint { display: none; }
+  #card .text { font-size: 18px; }
+}

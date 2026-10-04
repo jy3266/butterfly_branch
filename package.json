@@ -1,0 +1,13 @@
+{
+  "name": "butterfly-branch",
+  "version": "1.0.0",
+  "description": "관객의 글이 나비가 되어 흑백의 나뭇가지 주위를 날아다니는 인터랙티브 웹",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

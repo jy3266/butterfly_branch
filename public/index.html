@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>나비의 가지</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22black%22/%3E%3Ctext x=%2250%22 y=%2272%22 font-size=%2266%22 text-anchor=%22middle%22%3E🦋%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="stage"></div>
+
+  <div id="top-left">
+    <span id="count"></span>
+    <span id="live">연결 중</span>
+    <button id="sound" type="button">화면을 눌러 빗소리 켜기</button>
+  </div>
+  <div id="hint">나비를 누르면 빛이 되어 남겨진 글을 들려줍니다</div>
+
+  <div id="labels"></div>
+  <div id="card" aria-live="polite">
+    <button id="close" aria-label="닫기">×</button>
+    <div class="text"></div>
+    <div class="meta"></div>
+  </div>
+
+
+  <aside id="join">
+    <img src="qr.png" alt="원래 웹사이트로 연결되는 QR 코드">
+  </aside>
+  <p id="invite">QR을 스캔해서, 나무에게 마음을 보여주세요</p>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
